@@ -1,12 +1,18 @@
-interface TaskProps {
+export interface TaskProps {
   id: string
   text: string
+  completed: boolean
+  onDeleteTask?: any
 }
 
-export function Task({ id, text }: TaskProps) {
+export function Task({ id, text, onDeleteTask }: TaskProps) {
+  
+  function handleDeleteTask() {
+    onDeleteTask(id)
+  }
+
   return (
     <div className="group flex items-start gap-4 bg-gray-500 border border-gray-400 p-4 rounded-lg">
-      
       <div className="flex items-center cursor-pointer relative h-6 w-6">
         <input type="checkbox" id={id} className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full border border-blue-500 checked:bg-purple-500 checked:border-purple-500" />
           <span className="absolute text-gray-100 opacity-0 peer-checked:opacity-100 top-1/2 left-[10px] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
@@ -20,7 +26,7 @@ export function Task({ id, text }: TaskProps) {
         {text}
       </label>
 
-      <button className="w-6 h-6 flex justify-center items-center">
+      <button onClick={handleDeleteTask} className="w-6 h-6 flex justify-center items-center">
         <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M8.20214 4.98547H6.87158V10.5073H8.20214V4.98547Z" fill="#808080"/>
           <path d="M5.46239 4.98547H4.13184V10.5073H5.46239V4.98547Z" fill="#808080"/>
