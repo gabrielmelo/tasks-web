@@ -1,17 +1,28 @@
 import { nanoid } from 'nanoid'
 
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Task, TaskProps } from "../Task";
-import { CreateTaskButton } from "../CreateTaskButton";
+import { TaskButton } from "../CreateTaskButton";
 
 
 export function Tasks() {
   const [tasks, setTasks] = useState<TaskProps[]>([])
 
-  const [task, setNewTask] = useState('')
+  const [newTask, setNewTask] = useState('')
 
-  function handleNewTaskChange() {
+  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    event?.target.setCustomValidity('')
     setNewTask(event?.target.value)
+  }
+
+  function handleCreateNewTask(event: FormEvent) {
+    event?.preventDefault()
+
+    setTasks([...tasks, {
+      id: nanoid(),
+      text: newTask,
+      completed: false
+    }])
   }
 
   function deleteTask(taskIdToDelete: string) {
@@ -20,15 +31,11 @@ export function Tasks() {
     setTasks(createNewTasksWithoutDeleteOne)
   }
 
-  function handleCreateNewTask() {
-    event?.preventDefault()
-
-    setTasks([...tasks, {
-      id: nanoid(),
-      text: task,
-      completed: false
-    }])
+  function handleNewTaskInvalid(event: ChangeEvent<HTMLInputElement>) {
+    event?.target.setCustomValidity('Esse campo é obrigatório!')
   }
+
+  const isNewTaskEmpty = newTask.length === 0
 
   return (
     <div className="max-w-[736px] mx-auto">
@@ -40,12 +47,19 @@ export function Tasks() {
             className="w-full bg-gray-500 h-14 px-4 rounded-lg text-gray-100 
             placeholder:text-gray-300 border border-gray-700"
             onChange={handleNewTaskChange}
-            value={task}
+            onInvalid={handleNewTaskInvalid}
+            value={newTask}
             name="task"
+
+            required
             placeholder="Adicione uma nova tarefa"
           />
 
-          <CreateTaskButton label="Criar" type="submit" />
+          <TaskButton
+            label="Criar"
+            type="submit"
+            disabled={isNewTaskEmpty}
+          />
         </div>
       </form>
 

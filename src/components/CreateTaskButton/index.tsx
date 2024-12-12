@@ -1,13 +1,13 @@
 import { ComponentPropsWithRef } from "react"
 
-interface CreateTaskButtonProps extends ComponentPropsWithRef<"button"> {
+interface TaskButtonProps extends ComponentPropsWithRef<"button"> {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   label: string
 }
 
-export function CreateTaskButton({onClick, label, ...rest}: CreateTaskButtonProps) {
+export function TaskButton({onClick, label, ...rest}: TaskButtonProps) {
   return (
-    <button className="flex gap-2 items-center bg-blue-700 hover:brightness-95 rounded-lg p-4" onClick={onClick} {...rest}>
+    <button className="flex gap-2 items-center bg-blue-700 hover:brightness-95 disabled:brightness-50 rounded-lg p-4" onClick={onClick} {...rest}>
       <span className="font-bold text-white">{label}</span>
       
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
