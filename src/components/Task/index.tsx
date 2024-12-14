@@ -2,7 +2,7 @@ export interface TaskProps {
   id: string
   text: string
   completed: boolean
-  onDeleteTask?: any
+  onDeleteTask?: (id: string) => void
 }
 
 export function Task({ id, text, onDeleteTask }: TaskProps) {

@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 import { Task, TaskProps } from "../Task";
 import { TaskButton } from "../CreateTaskButton";
 
@@ -31,7 +31,7 @@ export function Tasks() {
     setTasks(createNewTasksWithoutDeleteOne)
   }
 
-  function handleNewTaskInvalid(event: ChangeEvent<HTMLInputElement>) {
+  function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
     event?.target.setCustomValidity('Esse campo é obrigatório!')
   }
 
