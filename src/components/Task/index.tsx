@@ -1,32 +1,50 @@
-export interface TaskProps {
+interface TaskProps {
   id: string
   text: string
-  completed: boolean
-  onDeleteTask?: (id: string) => void
+  isCompleted: boolean
+  onDeleteTask: (id: string) => void
+  onToggleTaskCompleted: (id: string) => void
 }
 
-export function Task({ id, text, onDeleteTask }: TaskProps) {
-  
-  function handleDeleteTask() {
+export function Task({ id, text, isCompleted, onDeleteTask, onToggleTaskCompleted }: TaskProps) {
+  function handleTaskDelete() {
     onDeleteTask(id)
   }
 
-  return (
-    <div className="group flex items-start gap-4 bg-gray-500 border border-gray-400 p-4 rounded-lg">
-      <div className="flex items-center cursor-pointer relative h-6 w-6">
-        <input type="checkbox" id={id} className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full border border-blue-500 checked:bg-purple-500 checked:border-purple-500" />
-          <span className="absolute text-gray-100 opacity-0 peer-checked:opacity-100 top-1/2 left-[10px] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 fill-gray-100" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-          </svg>
-        </span>
-      </div>
+  function handleTaskToggleCompleted() {
+    onToggleTaskCompleted(id)
+  }
 
-      <label htmlFor={id} className="flex-1 pr-2 cursor-pointer text-gray-100">
-        {text}
+  return (
+    <div
+      className="group flex items-center justify-between gap-4 bg-gray-500 border border-gray-400 rounded-lg overflow-hidden"
+      data-is-completed={isCompleted}>
+      
+      <label
+        htmlFor={id}
+        className="flex items-center flex-1 cursor-pointer py-4 pl-4">
+        
+        <div className="flex items-center cursor-pointer relative">
+          <input
+            type="checkbox"
+            id={id}
+            className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full border border-blue-500 checked:bg-purple-700 checked:border-purple-700"
+            onClick={handleTaskToggleCompleted}
+          />
+          <span className="absolute text-gray-100 opacity-0 peer-checked:opacity-100 top-1/2 left-[10px] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 fill-gray-100" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+            </svg>
+          </span>
+
+          <div className=" text-gray-100 ml-3 peer-checked:text-gray-300 peer-checked:line-through">
+            {text}
+          </div>
+        </div>
       </label>
 
-      <button onClick={handleDeleteTask} className="w-6 h-6 flex justify-center items-center">
+      <button
+        onClick={ handleTaskDelete } className="pr-4 py-4 flex justify-center items-center">
         <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M8.20214 4.98547H6.87158V10.5073H8.20214V4.98547Z" fill="#808080"/>
           <path d="M5.46239 4.98547H4.13184V10.5073H5.46239V4.98547Z" fill="#808080"/>
