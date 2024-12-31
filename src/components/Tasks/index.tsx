@@ -18,7 +18,7 @@ export function Tasks() {
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
 
-    setTasks([...tasks, {
+    setTasks((state) => [...state, {
       id: nanoid(),
       text: newTask,
       isCompleted: false
