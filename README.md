@@ -1,10 +1,10 @@
 # Task Web
 
-`Task Web` is a **to-do list application** developed as part of the practical test for the **React Fundamentals module** by Rocketseat. This application provides basic task management features, allowing users to efficiently manage and track their tasks.
+`Task Web` is a **to-do list application** developed as part of the practical test for the **React Fundamentals module** by Rocketseat. This application provides basic task management features, allowing users to manage and track their tasks efficiently.
 
 ## About the Challenge
 
-The goal of this challenge is to develop a simple **task control application** with the following features:
+The goal of this challenge is to develop a simple **task-control application** with the following features:
 
 1. **Add a New Task**  
    Users can create and add new tasks to the list.
@@ -35,7 +35,7 @@ This project helped reinforce core concepts of React, including:
 
 1. **State Management**  
    - Understanding how to use the `useState` hook to manage the application's state.  
-   - Learning about the importance of keeping the state immutable to ensure predictable behavior.
+   - Learning about keeping the state immutable to ensure predictable behavior.
 
 2. **Immutability**  
    - Understanding how to update the state without mutating the original data using methods like `map`, `filter`, and the spread operator (`...`).  
